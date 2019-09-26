@@ -1,27 +1,68 @@
 var connection = require("./connection.js");
+
+// Print ?
+function printQ(x) {
+    var arr = [];
+    for (var i = 0; i < x; i++) {
+        arr.push("?");
+    }
+    return arr.toString();
+}
+
+//Obj to Sql
+function objToSql(obj) {
+    var arr = [];
+    for (var key in obj) {
+        var value = obj[key];
+        if (Object.hasOwnProperty.call(obj, key)) {
+            if (typeof value === "string" && value.indexOf(" ") >= 0) {
+                value = "'" + value + "'";
+            }
+            arr.push(key + "=" + value);
+        }
+    }
+    return arr.toString();
+}
+
+
 var orm = {
-    selectAll: function (table) {
-        var qeury = "SELECT * FROM ??";
-        connection.query(query, [table], function (err, res) {
+    selectAll: function (table, cb) {
+        var qeury = "SELECT * FROM " + table + ";";
+        connection.query(query, function (err, res) {
             if (err) throw err;
-            return res;
+            cb(res);
         });
     },
-    insertOne: function (table,burger_name) {
-        var query = "INSERT INTO ?? (burger_name) VALUES (?)";
-        connection.query(query, [table,burger_name],function(err,res){
-            if(err) throw err;
-            console.log(burger_name+" inserted into " + table);
-            return res;
+    insertOne: function (table, target, value, cb) {
+        var query = "INSERT INTO " + table;
+        query += " (";
+        query += target.toString();
+        query += ") ";
+        query += "VALUES (";
+        query += printQ(value.length);
+        query += ") ";
+
+        console.log(query);
+
+        connection.query(query, value, function (err, res) {
+            if (err) throw err;
+            cb(res);
         });
     },
-    updateOne: function (table,burger_name, target, value) {
-        var query = "UPDATE ?? SET ?? =? WHERE burger_name =?";
-        connection.query(query,[table,target,value,burger_name],function(err,res){
-            if(err) throw err;
-            console.log("Updated "+target+" with value "+value+" for "+burger_name);
-            return res;
-        })
+    updateOne: function (table, objColVal, con, cb) {
+        var query = "UPDATE " + table;
+
+        query += " SET ";
+        query += objToSql(objColVal);
+        query += " WHERE ";
+        query += con;
+
+        console.log(query);
+        connection.query(query, function (err, res) {
+            if (err) throw err;
+            cb(res);
+        });
+
     }
 }
 
