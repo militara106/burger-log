@@ -27,7 +27,7 @@ function objToSql(obj) {
 
 var orm = {
     selectAll: function (table, cb) {
-        var qeury = "SELECT * FROM " + table + ";";
+        var query = "SELECT * FROM " + table + ";";
         connection.query(query, function (err, res) {
             if (err) throw err;
             cb(res);
