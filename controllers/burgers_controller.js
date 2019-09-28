@@ -3,7 +3,7 @@ var router = express.Router();
 var burger = require("../models/burger.js");
 
 // GET
-router.get("*", function (req, res) {
+router.get("/", function (req, res) {
     burger.selectAll(function (result) {
         console.log({
             burgers: result
