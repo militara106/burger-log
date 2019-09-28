@@ -4,8 +4,6 @@ var routes = require("./controllers/burgers_controller.js");
 
 var app = express();
 
-var PORT = process.env.PORT || 8080;
-
 app.use(express.static("public"));
 
 app.use(express.urlencoded({
@@ -20,7 +18,6 @@ app.set("view engine", "handlebars");
 
 app.use(routes);
 
-app.listen(PORT, function () {
-    // Log (server-side) when our server has started
-    console.log("Server listening on: http://localhost:" + PORT);
+app.listen(process.env.PORT || 8080, function () {
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
