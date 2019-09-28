@@ -1,6 +1,7 @@
+  <div class="content">
   <h1>Burgers</h1>
   {{#each burgers}}
-  	<div>
+  	<div class="burger">
       {{this.id}}. {{this.burger_name}}
       {{#if devoured}}
       <br>Devoured
@@ -10,13 +11,14 @@
   	</div>
     <br>
   {{/each}}
+</div>
 
 
-<h2>Add a burger</h2>
 <form class="create-form">
+  <h2>Add a burger</h2>
   <div class="form-group">
     <label for="ca">Burger:</label>
     <input type="text" id="ca" name="burger_name">
   </div>
-  <button type="submit">Add burger</button>
+  <button class="submit" type="submit">Add burger</button>
 </form>
