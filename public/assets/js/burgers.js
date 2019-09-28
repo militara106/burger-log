@@ -11,5 +11,5 @@ $(document).ready(function(){
             location.reload();
             console.log(id+" eaten");
         });
-    })
+    });
 });
