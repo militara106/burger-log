@@ -4,7 +4,7 @@
   	<div class="burger">
       {{this.id}}. 
       {{#if devoured}}
-      <div style="text-decoration: line-through">{{this.burger_name}}</div>
+      <span style="text-decoration: line-through">{{this.burger_name}}</span>
       {{else}}
       {{this.burger_name}}
       <br><button class="eat" data-id="{{this.id}}">Devour</button>
