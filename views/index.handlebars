@@ -2,10 +2,11 @@
   <h1>Burgers</h1>
   {{#each burgers}}
   	<div class="burger">
-      {{this.id}}. {{this.burger_name}}
+      {{this.id}}. 
       {{#if devoured}}
-      <br>Devoured
+      <div style="text-decoration: line-through">{{this.burger_name}}</div>
       {{else}}
+      {{this.burger_name}}
       <br><button class="eat" data-id="{{this.id}}">Devour</button>
       {{/if}}
   	</div>
